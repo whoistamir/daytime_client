@@ -35,6 +35,8 @@ int main(int argc, char **argv){
 		fprintf(stdout, "warning: could not convert %s\n", argv[1]);
 		exit(EXIT_FAILURE);
 	}
+
+
 	
 	if(connect(sockfd, (SA *) &servaddr, sizeof(servaddr)) < 0){
 		fprintf(stdout, "warning: could not connect to IP address\n");
@@ -53,6 +55,7 @@ int main(int argc, char **argv){
 		fprintf(stdout, "warning: read error\n");
 		exit(EXIT_FAILURE);
 	} 
-	
+
+	close(sockfd);
 	exit(EXIT_SUCCESS);
 }
