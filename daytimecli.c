@@ -12,7 +12,7 @@
 int main(int argc, char **argv){
 	
 	if(argc != 2){
-		fprintf(stderr, "usage: daytimecli [ip address]\n");
+		fprintf(stdout, "usage: daytimecli [ip address]\n");
 		exit(EXIT_FAILURE);
 	}
 	
@@ -20,7 +20,7 @@ int main(int argc, char **argv){
 	int sockfd = socket(AF_INET, SOCK_STREAM, 0);
 	
 	if(sockfd < 0){
-		fprintf(stderr, "warning: socket error\n");
+		fprintf(stdout, "warning: socket error\n");
 		exit(EXIT_FAILURE);
 	}
 	
@@ -32,12 +32,12 @@ int main(int argc, char **argv){
 	servaddr.sin_port = htons(13);
 	
 	if(inet_pton(AF_INET, argv[1], &servaddr.sin_addr) <= 0){
-		fprintf(stderr, "warning: could not convert IP address\n");
+		fprintf(stdout, "warning: could not convert %s\n", argv[1]);
 		exit(EXIT_FAILURE);
 	}
 	
 	if(connect(sockfd, (SA *) &servaddr, sizeof(servaddr)) < 0){
-		fprintf(stderr, "warning: could not connect to IP address\n");
+		fprintf(stdout, "warning: could not connect to IP address\n");
 		exit(EXIT_FAILURE);
 	}
 	
@@ -50,7 +50,7 @@ int main(int argc, char **argv){
 	}
 	
 	if(n < 0){
-		fprintf(stderr, "warning: read error\n");
+		fprintf(stdout, "warning: read error\n");
 		exit(EXIT_FAILURE);
 	} 
 	
